@@ -1,0 +1,106 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: futa-editor
+
+servers:
+  - url: 'http://localhost:8080/'
+    description: 'API サーバー'
+
+paths:
+  "/catalog":
+    get:
+      summary:
+        カタログからのスレッド一覧取得
+      description: 
+        カタログからスレッド一覧を配列として取得する
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Threads"
+
+  "/catalog/{id}":
+    get:
+      summary:
+        "スレッド取得"
+      description:
+        スレッドを取得する
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Thread"
+
+components:
+  schemas:
+    Threads:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int64
+            description: スレッド識別子
+            example: 0
+          title:
+            type: string
+            description: スレッドタイトル
+            example: "title"
+          resNum:
+            type: integer
+            format: int64
+            description: "レス数"
+            example: 0
+          src:
+            type: string
+            description: 画像のパス
+            example: "noimage.png"
+          path:
+            type: string
+            description: スレッドのURL
+            example: "http://img.2chan.net/00/res/0.htm"
+
+    Thread:
+      type: array
+      items:
+        type: object
+        properties:
+          id: 
+            type: integer
+            format: int64
+            example: 0
+          items:
+            type: array
+            items:
+              $ref: "#/components/schemas/Comment"
+
+    Comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 0
+        name:
+          type: string
+          example: "name"
+        date:
+          type: string
+          example: "1990-01-01:01:01:01"
+        rate:
+          type: integer
+          format: int64
+          example: 0
+        src:
+          type: string
+          example: "noimage.png"
+        content:
+          type: string
+          example: "This is a comment. "
