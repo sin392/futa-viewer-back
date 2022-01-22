@@ -93,7 +93,7 @@ components:
           example: "name"
         date:
           type: string
-          example: "1990-01-01:01:01:01"
+          example: "1990-01-01 00:00:00"
         rate:
           type: integer
           format: int64
