@@ -13,4 +13,4 @@ router = APIRouter()
 router.include_router(catalog_router, prefix='/catalog')
 router.include_router(threads_router, prefix='/threads')
 
-app.include_router(router, prefix='v1')
+app.include_router(router, prefix='/v1')
