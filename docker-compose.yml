@@ -1,0 +1,12 @@
+version: "3.0"
+
+services:
+  # FastAPI
+  api:
+    container_name: "futa-view-back"
+    build: .
+    tty: true
+    ports:
+      - 15555:8000
+    volumes:
+      - ./app:/app:cached
