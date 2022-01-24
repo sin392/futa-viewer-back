@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from typing import List
-from os.path import join
+from os.path import join, basename, splitext
 
 
 # 板名やスレッドの取得も
@@ -15,6 +15,7 @@ class CatalogParser:
             a_tag = td_tag.find('a')
             obj['a'] = {'href': join(prefix, a_tag['href']),
                         'target': a_tag['target']}
+            obj['id'] = int(splitext(basename(a_tag['href']))[0])
             img_tag = a_tag.find('img')
             if img_tag is not None:
                 obj['img'] = a_tag.find('img').attrs
