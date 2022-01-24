@@ -18,6 +18,8 @@ class CatalogParser:
             img_tag = a_tag.find('img')
             if img_tag is not None:
                 obj['img'] = a_tag.find('img').attrs
+                obj['img']['src'] = join(
+                    prefix, *obj['img']['src'].split('/')[2:])
             else:
                 # 画像がない時にはsmallタグで'ｷﾀｰ'という表示
                 obj['img'] = None
