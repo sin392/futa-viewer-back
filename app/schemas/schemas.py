@@ -26,12 +26,12 @@ class ThreadPreview(BaseModel):
 
 
 class Catalog(BaseModel):
-    id: int = Field(0)
-    items: List[ThreadPreview] = Field(0)
+    # id: int = Field(0)
+    items: List[ThreadPreview] = Field([])
 
 
-class CommentImage(BaseModel):
-    src: Optional[str] = Field(None)
+# class CommentImage(BaseModel):
+#     src: Optional[str] = Field(None)
 
 
 class Comment(BaseModel):
@@ -39,14 +39,16 @@ class Comment(BaseModel):
     title: str = Field('無題')
     name: str = Field('としあき')
     # TODO: replace str with date
-    date: str = Field('1900-01-01 00:00:00')
+    date: str = Field('00/01/01(土)00:00:00')
 
-    rate: Optional[int] = Field(0)
+    rate: int = Field(0)
     body: str = Field('This is a comment.')
-    img: CommentImage = Field(CommentImage())
+    # img: CommentImage = Field(CommentImage())
+    srcs: List[str] = Field([]) # org src, thumb src
+    no: str = Field('No.111111111')
 
 
 class Thread(BaseModel):
     # id: int = Field(0)
-    title: str = Field('スレタイ')
+    # src: str = Field(None)
     items: List[Comment] = Field([])

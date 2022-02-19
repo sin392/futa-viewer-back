@@ -1,16 +1,15 @@
-from typing import List
-from fastapi import APIRouter, Path
+from fastapi import APIRouter, Path, Query
 import services.threads as services
-from schemas.schemas import Thread, ThreadPreview
+from schemas.schemas import Thread, Catalog
 from . import symbols
 
 router = APIRouter()
 
 
-@router.get('/{board_name}', response_model=List[ThreadPreview])
-async def get_thread_previews(board_name: str = Path('dec')):
+@router.get('/{board_name}', response_model=Catalog)
+async def get_catalog(board_name: str = Path('dec'), sort: str = Query('0')):
     symbol = symbols[board_name]
-    return services.get_thread_previews(board_name, symbol)
+    return services.get_catalog(board_name, symbol, sort)
 
 
 @router.get('/{board_name}/{thread_id}', response_model=Thread)
