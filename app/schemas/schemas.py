@@ -36,12 +36,12 @@ class Catalog(BaseModel):
 
 class Comment(BaseModel):
     order: int = Field(0)
-    title: str = Field('無題')
-    name: str = Field('としあき')
+    title: Optional[str] = Field(None)
+    name: Optional[str] = Field(None)
     # TODO: replace str with date
     date: str = Field('00/01/01(土)00:00:00')
 
-    rate: int = Field(0)
+    rate: Optional[int] = Field(None)
     body: str = Field('This is a comment.')
     # img: CommentImage = Field(CommentImage())
     srcs: List[str] = Field([]) # org src, thumb src

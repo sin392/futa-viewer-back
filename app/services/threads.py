@@ -10,7 +10,7 @@ c_parser = CatalogParser()
 # TODO: 名称の統一
 def get_catalog(board_name: str, symbol: str, sort: str):
     prefix = f'https://{board_name}.2chan.net/{symbol}'
-    req = requests.get(f'{prefix}/futaba.php', params={'mode': 'cat', 'sort': sort})
+    req = requests.get(f'{prefix}/futaba.php', params={'mode': 'cat', 'sort': sort, 'cxyl': '14x6x10x0x0'})
     items = c_parser.parse(req.content, prefix)
     return Catalog(items=items)
 
