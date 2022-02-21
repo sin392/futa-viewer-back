@@ -15,8 +15,10 @@ def get_catalog(board_name: str, sort: str):
     else:
         raise HTTPException(
             status_code=404, detail="Board Not Registered OR Not Existed")
-    req = requests.get(f'{prefix}/futaba.php',
+    url = f'{prefix}/futaba.php'
+    req = requests.get(url,
                        params={'mode': 'cat', 'sort': sort, 'cxyl': '14x6x10x0x0'})
+
     if req.status_code == 404:
         raise HTTPException(status_code=404, detail="Board Not Found")
 
@@ -37,7 +39,8 @@ def get_thread(board_name: str, thread_id: int):
         raise HTTPException(
             status_code=404, detail="Board Not Registered OR Not Existed")
 
-    req = requests.get(f'{prefix}/res/{thread_id}.htm')
+    url = f'{prefix}/res/{thread_id}.htm'
+    req = requests.get(url)
 
     if req.status_code == 404:
         raise HTTPException(status_code=404, detail="Thread Not Found")
