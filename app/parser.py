@@ -50,7 +50,13 @@ class CatalogParser(BaseParser):
             a_tag = td_tag.find('a')
             # obj['href'] = join(self.prefix, a_tag.get(
             #     'href')) if a_tag is not None else None
-            obj['id'] = int(splitext(basename(a_tag['href']))[0])  # スレッドへのリンク
+            try:
+                # 時々,'futaba'などの整数化できない文字列が入ってくる
+                obj['id'] = int(
+                    splitext(basename(a_tag['href']))[0])  # スレッドへのリンク
+            except Exception as e:
+                print(e)
+                obj['id'] = 0
             obj['img'] = self._extract_image(start_tag=a_tag, default=None)
             # print(obj['img'])
             small_tag = td_tag.find('small')
