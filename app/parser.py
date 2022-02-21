@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 from typing import List
+import re
 from os.path import join, basename, splitext
 
 
@@ -81,7 +82,12 @@ class ThreadParser(BaseParser):
                 obj[self.span_key_map[class_name[0]]] = x.text.strip()
         # そうだね
         a_sod_tag = thread_div_tag.find('a', class_='sod')
-        obj['sod'] = a_sod_tag.text
+        if a_sod_tag is not None:
+            str_sod = re.sub(r'\D', '', a_sod_tag.text)
+            obj['sod'] = int(str_sod) if str_sod != '' else 0
+        else:
+            obj['sod'] = None
+
         # 本文
         block_quote_tag = thread_div_tag.find('blockquote')
         br_tag = block_quote_tag.br
@@ -103,7 +109,11 @@ class ThreadParser(BaseParser):
             obj['body'] = sub_block_quote_tag.get_text('\n')
             # そうだね
             a_sod_tag = table_tag.find('a', class_='sod')
-            obj['sod'] = a_sod_tag.text
+            if a_sod_tag is not None:
+                str_sod = re.sub(r'\D', '', a_sod_tag.text)
+                obj['sod'] = int(str_sod) if str_sod != '' else 0
+            else:
+                obj['sod'] = None
             objs.append(obj)
 
         return objs

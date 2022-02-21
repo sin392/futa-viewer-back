@@ -29,7 +29,7 @@ class Comment(BaseModel):
     # TODO: replace str with date
     date: str = Field('00/01/01(土)00:00:00')
     no: str = Field('No.111111111')
-    sod: Optional[str] = Field(None)
+    sod: Optional[int] = Field(None)
     body: str = Field('This is a comment.')
     href: Optional[str] = Field(None)  # 元画像へのリンク
     img: Optional[Image] = Field(None)
