@@ -28,7 +28,6 @@ def get_catalog(board_name: str, sort: str):
         print(e)
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
-    items = c_parser.parse(req.content, prefix)
     return Catalog(items=items)
 
 

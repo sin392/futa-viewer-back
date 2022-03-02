@@ -3,7 +3,6 @@ from typing import List
 import re
 from os.path import join, basename, splitext
 
-
 class BaseParser:
     soup = None
     prefix = ''

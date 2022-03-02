@@ -37,3 +37,11 @@ class Comment(BaseModel):
 
 class Thread(BaseModel):
     items: List[Comment] = Field([])
+
+
+class Board(BaseModel):
+    name: str = Field('')
+    href: str = Field('')
+
+class Menu(BaseModel):
+    items: List[Board] = Field([])

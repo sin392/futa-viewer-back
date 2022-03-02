@@ -1,6 +1,7 @@
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from routers.threads import router as threads_router
+from routers.boards import router as boards_router
 
 app = FastAPI()
 
@@ -24,5 +25,6 @@ async def root():
 
 router = APIRouter()
 router.include_router(threads_router, prefix='/threads')
+router.include_router(boards_router, prefix='/boards')
 
 app.include_router(router, prefix='/v1')
